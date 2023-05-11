@@ -2,8 +2,9 @@ package com.example.demowork.service.ServiceImpl;
 
 import com.example.demowork.dto.HrDTO;
 import com.example.demowork.enums.Role;
+import com.example.demowork.exception.ResourceNotFoundException;
 import com.example.demowork.exception.UserAlreadyExistExceptions;
-import com.example.demowork.model.HrUser;
+import com.example.demowork.model.User;
 import com.example.demowork.repository.HrUserRepository;
 import com.example.demowork.service.HrService;
 import lombok.RequiredArgsConstructor;
@@ -19,18 +20,20 @@ public class HrServiceImpl implements HrService {
     private final ModelMapper modelMapper;
     @Override
     public HrDTO createHrUser(HrDTO hrDTO) {
-        Optional<HrUser> find = hrUserRepository.findByEmail(hrDTO.getEmail());
+        Optional<User> find = hrUserRepository.findByEmail(hrDTO.getEmail());
         if(find.isPresent()){
-            throw  new UserAlreadyExistExceptions("User already exists");
+            throw  new UserAlreadyExistExceptions("User Already exists");
         }
-        HrUser hr = new HrUser();
+        User hr = new User();
         hr.setFirstname(hrDTO.getFirstname());
+        hr.setMiddleName(hrDTO.getMiddleName());
         hr.setLastname(hrDTO.getLastname());
+        hr.setDateOfBirth(hrDTO.getDateOfBirth());
         hr.setEmail(hrDTO.getEmail());
         hr.setPassword(hrDTO.getPassword());
         hr.setPhoneNumber(hrDTO.getPhoneNumber());
         hr.setRole(Role.HR);
-        HrUser newHr = hrUserRepository.save(hr);
+        User newHr = hrUserRepository.save(hr);
         HrDTO mapHr = modelMapper.map(newHr, HrDTO.class);
         return mapHr;
     }

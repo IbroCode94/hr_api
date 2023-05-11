@@ -10,14 +10,19 @@ import lombok.*;
 @Table(name = "Hr_user")
 @AllArgsConstructor
 @NoArgsConstructor
-public class HrUser {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     @Column(nullable = false)
     private String firstname;
     @Column(nullable = false)
+    private String middleName;
+
+    @Column(nullable = false)
     private String lastname;
+    @Column(nullable = false)
+    private String DateOfBirth;
     @Column(nullable = false, unique = true)
     private String email;
     @Column(nullable = false)
