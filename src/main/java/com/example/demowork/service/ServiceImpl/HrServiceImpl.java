@@ -1,8 +1,9 @@
 package com.example.demowork.service.ServiceImpl;
 
-import com.example.demowork.dto.HrDTO;
+import com.example.demowork.dto.HrRequestDTO;
+import com.example.demowork.dto.HrResponseDto;
 import com.example.demowork.enums.Role;
-import com.example.demowork.exception.ResourceNotFoundException;
+import com.example.demowork.exception.RegistrationException;
 import com.example.demowork.exception.UserAlreadyExistExceptions;
 import com.example.demowork.model.User;
 import com.example.demowork.repository.HrUserRepository;
@@ -19,7 +20,7 @@ public class HrServiceImpl implements HrService {
     private final HrUserRepository hrUserRepository;
     private final ModelMapper modelMapper;
     @Override
-    public HrDTO createHrUser(HrDTO hrDTO) {
+    public HrResponseDto createHrUser(HrRequestDTO hrDTO) {
         Optional<User> find = hrUserRepository.findByEmail(hrDTO.getEmail());
         if(find.isPresent()){
             throw  new UserAlreadyExistExceptions("User Already exists");
@@ -33,9 +34,14 @@ public class HrServiceImpl implements HrService {
         hr.setPassword(hrDTO.getPassword());
         hr.setPhoneNumber(hrDTO.getPhoneNumber());
         hr.setRole(Role.HR);
-        User newHr = hrUserRepository.save(hr);
-        HrDTO mapHr = modelMapper.map(newHr, HrDTO.class);
-        return mapHr;
+        try {
+            User newHr = hrUserRepository.save(hr);
+            HrResponseDto mapHr = modelMapper.map(newHr, HrResponseDto.class);
+            return mapHr;
+        }catch(Exception e){
+            throw new RegistrationException("Failed to Register User");
+        }
+
     }
 
 //    @Override

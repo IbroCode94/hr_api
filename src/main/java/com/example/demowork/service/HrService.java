@@ -1,8 +1,9 @@
 package com.example.demowork.service;
 
-import com.example.demowork.dto.HrDTO;
+import com.example.demowork.dto.HrRequestDTO;
+import com.example.demowork.dto.HrResponseDto;
 
 public interface HrService {
-    public HrDTO createHrUser(HrDTO hrDTO);
+     HrResponseDto createHrUser(HrRequestDTO hrDTO);
 //    void  validateHrUser(HrDTO hrDTO);
 }

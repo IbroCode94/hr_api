@@ -1,35 +1,36 @@
 package com.example.demowork.model;
 
 import com.example.demowork.enums.Role;
-import jakarta.persistence.*;
-import lombok.*;
 
-@Entity
+import lombok.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+
 @Getter
 @Setter
-@Table(name = "Hr_user")
+@Document
 @AllArgsConstructor
 @NoArgsConstructor
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long id;
-    @Column(nullable = false)
+
+    private String id;
+
     private String firstname;
-    @Column(nullable = false)
+
     private String middleName;
 
-    @Column(nullable = false)
+
     private String lastname;
-    @Column(nullable = false)
+
     private String DateOfBirth;
-    @Column(nullable = false, unique = true)
+
     private String email;
-    @Column(nullable = false)
+
     private String password;
-    @Column(nullable = false)
+
     private String PhoneNumber;
-    @Enumerated(EnumType.STRING)
     private Role role;
 
 }

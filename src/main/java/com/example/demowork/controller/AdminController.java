@@ -1,6 +1,7 @@
 package com.example.demowork.controller;
 
-import com.example.demowork.dto.HrDTO;
+import com.example.demowork.dto.HrRequestDTO;
+import com.example.demowork.dto.HrResponseDto;
 import com.example.demowork.service.HrService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +21,7 @@ public class AdminController {
     }
     @PostMapping("/register")
 
-    public ResponseEntity<HrDTO> creatHr(@RequestBody HrDTO hrDTO){
+    public ResponseEntity<HrResponseDto> creatHr(@RequestBody HrRequestDTO hrDTO){
         return  new ResponseEntity<>(hrService.createHrUser(hrDTO), HttpStatus.CREATED);
     }
 }

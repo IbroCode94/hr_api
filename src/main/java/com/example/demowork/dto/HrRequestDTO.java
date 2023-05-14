@@ -11,7 +11,7 @@ import javax.validation.constraints.Size;
 
 @Getter
 @Setter
-public class HrDTO {
+public class HrRequestDTO {
     @NotBlank(message = "First name is mandatory")
     private String firstname;
     @NotBlank(message = "First name is mandatory")
@@ -19,7 +19,7 @@ public class HrDTO {
     @NotBlank(message = "First name is mandatory")
     private  String lastname;
     private String dateOfBirth;
-    @NotBlank(message = "First name is mandatory")
+    @NotBlank(message = "email name is mandatory")
     @Email(message = "Enter a valid email", regexp = "(^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$)")
     private String email;
     private String password;
